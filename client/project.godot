@@ -15,6 +15,10 @@ run/main_scene="uid://bmp2m8t4c5ed7"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+WS="*res://websockets.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/protobuf/plugin.cfg")

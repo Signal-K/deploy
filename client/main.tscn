@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmp2m8t4c5ed7"]
+[gd_scene load_steps=3 format=3 uid="uid://bmp2m8t4c5ed7"]
 
 [ext_resource type="Script" uid="uid://dnme3ed3spxsl" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cpcsvlil57jph" path="res://classes/log/log.gd" id="2_0xm2m"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_ig7tw")
+
+[node name="Log" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 210.0
+offset_right = 1091.0
+offset_bottom = 594.0
+script = ExtResource("2_0xm2m")
+metadata/_custom_type_script = "uid://cpcsvlil57jph"
