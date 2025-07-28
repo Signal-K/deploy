@@ -7,12 +7,27 @@ import (
 	"sailserver/pkg/packets"
 )
 
+// State handler to process client messages
+type ClientStateHandler interface {
+	Name() string
+
+	// Inject client into state handler
+	SetClient(client ClientInterfacer)
+
+	OnEnter()
+	HandleMessage(senderId uint64, message packets.Msg)
+
+	OnExit()
+}
+
 type ClientInterfacer interface {
 	Id() uint64
 	ProcessMessage(senderId uint64, message packets.Msg)
 
 	// Set the client id
 	Initialize(id uint64)
+
+	SetState(newState ClientStateHandler)
 
 	SocketSend(message packets.Msg)
 

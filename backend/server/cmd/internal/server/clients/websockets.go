@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"sailserver/cmd/internal/server"
+	"sailserver/cmd/internal/server/states"
 	"sailserver/pkg/packets"
 
 	"github.com/gorilla/websocket"
@@ -16,12 +17,16 @@ type WebSocketClient struct {
 	conn     *websocket.Conn
 	hub      *server.Hub
 	sendChan chan *packets.Packet
+	state    server.ClientStateHandler
 	logger   *log.Logger
 }
 
 // Close implements server.ClientInterfacer.
 func (c *WebSocketClient) Close(reason string) {
 	c.logger.Printf("Closing client connection because: %s", reason)
+
+	c.SetState(nil) // Calls on exit method
+
 	c.hub.UnregisterChan <- c
 	c.conn.Close()
 	if _, closed := <-c.sendChan; !closed {
@@ -56,19 +61,34 @@ func (c *WebSocketClient) Id() uint64 {
 	return c.id
 }
 
-func (c *WebSocketClient) ProcessMessage(senderId uint64, message packets.Msg) {
-	if senderId == c.id {
-		c.Broadcast(message)
-	} else {
-		c.SocketSendAs(message, senderId)
+func (c *WebSocketClient) SetState(state server.ClientStateHandler) {
+	prevStateName := "None"
+	if c.state != nil {
+		prevStateName = c.state.Name()
 	}
+
+	newStateName := "None"
+	if state != nil {
+		newStateName = state.Name()
+	}
+
+	c.logger.Printf("Switching from state %s to %s", prevStateName, newStateName)
+
+	c.state = state
+	if c.state != nil {
+		c.state.SetClient((c))
+		c.state.OnEnter()
+	}
+}
+
+func (c *WebSocketClient) ProcessMessage(senderId uint64, message packets.Msg) {
+	c.state.HandleMessage(senderId, message)
 }
 
 func (c *WebSocketClient) Initialize(id uint64) {
 	c.id = id
 	c.logger.SetPrefix(fmt.Sprintf("Client %d: ", c.id))
-	c.SocketSend((packets.NewId(c.id)))
-	c.logger.Printf("Sent id to client")
+	c.SetState(&states.Connected{})
 }
 
 func (c *WebSocketClient) SocketSend(message packets.Msg) {
