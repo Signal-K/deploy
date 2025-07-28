@@ -16,3 +16,10 @@ offset_right = 1091.0
 offset_bottom = 594.0
 script = ExtResource("2_0xm2m")
 metadata/_custom_type_script = "uid://cpcsvlil57jph"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 1145.0
+offset_bottom = 105.0

@@ -67,6 +67,8 @@ func (c *WebSocketClient) ProcessMessage(senderId uint64, message packets.Msg) {
 func (c *WebSocketClient) Initialize(id uint64) {
 	c.id = id
 	c.logger.SetPrefix(fmt.Sprintf("Client %d: ", c.id))
+	c.SocketSend((packets.NewId(c.id)))
+	c.logger.Printf("Sent id to client")
 }
 
 func (c *WebSocketClient) SocketSend(message packets.Msg) {

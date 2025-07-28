@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2fckb5d167ic"]
+
+[ext_resource type="Script" uid="uid://2kfd52xpeko6" path="res://Objects/Planets/Planet.gd" id="1_pkkum"]
+
+[node name="Planet" type="Node3D"]
+
+[node name="Up" type="MeshInstance3D" parent="."]
+script = ExtResource("1_pkkum")
+
+[node name="Down" type="MeshInstance3D" parent="."]
+script = ExtResource("1_pkkum")
+normal = Vector3(0, -1, 0)
+
+[node name="Left" type="MeshInstance3D" parent="."]
+script = ExtResource("1_pkkum")
+
+[node name="Right" type="MeshInstance3D" parent="."]
+script = ExtResource("1_pkkum")
+
+[node name="Front2" type="MeshInstance3D" parent="."]
+script = ExtResource("1_pkkum")
+
+[node name="Back" type="MeshInstance3D" parent="."]
+script = ExtResource("1_pkkum")

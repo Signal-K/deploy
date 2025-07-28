@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7ittiwa4lw7v"]
+
+[ext_resource type="Texture2D" uid="uid://bdnq55v07eb35" path="res://Assets/Backdrops/panorama2.jpg" id="1_2dftf"]
+[ext_resource type="PackedScene" uid="uid://wx7r7iaolr2d" path="res://Objects/star.tscn" id="2_bcbcq"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_js7pq"]
+panorama = ExtResource("1_2dftf")
+
+[sub_resource type="Sky" id="Sky_2dftf"]
+sky_material = SubResource("PanoramaSkyMaterial_js7pq")
+
+[sub_resource type="Environment" id="Environment_p1v5b"]
+background_mode = 2
+sky = SubResource("Sky_2dftf")
+adjustment_enabled = true
+adjustment_saturation = 3.35
+
+[node name="Sailing" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p1v5b")
+
+[node name="Star" parent="." instance=ExtResource("2_bcbcq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185364, 0, 0.239756)
