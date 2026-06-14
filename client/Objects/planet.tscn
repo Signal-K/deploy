@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2fckb5d167ic"]
+[gd_scene load_steps=3 format=3 uid="uid://c2fckb5d167ic"]
 
-[ext_resource type="Script" uid="uid://2kfd52xpeko6" path="res://Objects/Planets/Planet.gd" id="1_pkkum"]
+[ext_resource type="Script" uid="uid://ccifshtocag26" path="res://Objects/Planet.gd" id="1_d5lcf"]
+[ext_resource type="Script" uid="uid://2kfd52xpeko6" path="res://Objects/Planets/PlanetMesh.gd" id="1_pkkum"]
 
 [node name="Planet" type="Node3D"]
+script = ExtResource("1_d5lcf")
 
 [node name="Up" type="MeshInstance3D" parent="."]
 script = ExtResource("1_pkkum")

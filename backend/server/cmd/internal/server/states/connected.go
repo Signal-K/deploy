@@ -24,6 +24,24 @@ func (c *Connected) SetClient(client server.ClientInterfacer) {
 
 func (c *Connected) OnEnter() {
 	c.client.SocketSend(packets.NewId(c.client.Id()))
+
+	// Check if user already exists
+	// existingUser, err := c.client.DbTx().Queries.GetUserByUsername(c.client.DbTx().Ctx, "test")
+	// if err != nil {
+	// 	// User doesn't exist, create new user
+	// 	user, createErr := c.client.DbTx().Queries.CreateUser(c.client.DbTx().Ctx, db.CreateUserParams{
+	// 		Username:     "test",
+	// 		PasswordHash: "test1",
+	// 	})
+
+	// 	if createErr != nil {
+	// 		c.logger.Printf("Failed to create user: %s", createErr)
+	// 	} else {
+	// 		c.logger.Printf("Created new user: %v", user)
+	// 	}
+	// } else {
+	// 	c.logger.Printf("User already exists: %v", existingUser)
+	// }
 }
 
 func (c *Connected) HandleMessage(senderId uint64, message packets.Msg) {

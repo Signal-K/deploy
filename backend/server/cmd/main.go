@@ -23,6 +23,12 @@ func main() {
 		hub.Serve(clients.NewWebSocketClient, w, r)
 	})
 
+	// Health check endpoint
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
+	})
+
 	go hub.Run()
 	addr := fmt.Sprintf(":%d", *port)
 

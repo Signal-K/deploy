@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Client"
-run/main_scene="uid://bmp2m8t4c5ed7"
+run/main_scene="uid://cf4lxe2y1w2do"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwrdr3lswn17j"]
+
+[ext_resource type="Texture2D" uid="uid://cki8oy1thjyse" path="res://Assets/SpriteSheets/Telescope/Skymap.png" id="1_ftly4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v0582"]
+
+[node name="SatelliteDeployed" type="Node2D"]
+
+[node name="Skymap2" type="Sprite2D" parent="."]
+position = Vector2(581, 328)
+scale = Vector2(1.10742, 0.642578)
+texture = ExtResource("1_ftly4")
+
+[node name="Satellite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v0582")

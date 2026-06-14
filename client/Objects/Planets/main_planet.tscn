@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf4lxe2y1w2do"]
+
+[ext_resource type="PackedScene" uid="uid://c2fckb5d167ic" path="res://Objects/planet.tscn" id="1_7rw6h"]
+
+[node name="Main-Planet" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.768284, 0.117749, -0.629186, 0, 0.982935, 0.183951, 0.64011, 0.141327, -0.755173, 0, 32.2999, 45.9713)
+
+[node name="Planet" parent="." instance=ExtResource("1_7rw6h")]

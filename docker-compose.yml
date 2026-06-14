@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Go backend service
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spheres-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    networks:
+      - spheres-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Godot development container (optional for development)
+  godot-dev:
+    image: barichello/godot-ci:4.3
+    container_name: spheres-godot-dev
+    volumes:
+      - ./client:/workspace
+    working_dir: /workspace
+    command: ["tail", "-f", "/dev/null"]  # Keep container running
+    networks:
+      - spheres-network
+    profiles:
+      - dev
+
+networks:
+  spheres-network:
+    driver: bridge
+
+volumes:
+  godot-data:
